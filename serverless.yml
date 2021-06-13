@@ -31,4 +31,4 @@ functions:
   initialize:
     handler: initialize.handler_initialize
   paginated:
-    handler: handler_paginated
+    handler: paginated.handler_paginated
