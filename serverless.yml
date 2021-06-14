@@ -1,24 +1,10 @@
-# Welcome to Serverless!
-#
-# This file is the main config file for your service.
-# It's very minimal at this point and uses default values.
-# You can always add more config options for more control.
-# We've included some commented out config examples here.
-# Just uncomment any of them to get that config option.
-#
-# For full config options, check the docs:
-#    docs.serverless.com
-#
-# Happy Coding!
-
 service: stepfunction-serverlessframework-travis
-# app and org for use with dashboard.serverless.com
-#app: your-app-name
-#org: your-org-name
-
-# You can pin your service to only deploy with a specific Serverless version
-# Check out our docs for more details
 frameworkVersion: '2'
+
+plugins:
+  - serverless-step-functions
+  - serverless-pseudo-parameters
+  - serverless-python-requirements
 
 provider:
   name: aws
@@ -32,3 +18,24 @@ functions:
     handler: initialize.handler_initialize
   paginated:
     handler: paginated.handler_paginated
+
+stepFunctions:
+  stateMachines:
+    paginatedInfo:
+      name: sendMessageFunc-${self:custom.service}-${opt:stage}
+      definition:
+        StartedAt: Initialize
+        States:
+          Initialize:
+            Type: Task
+            Resource:
+              Fn::GetAtt::[initialize, Arn]
+            Next: Paginated
+          Paginated:
+            Type: Task
+            Resource:
+              Fn::GetAtt::[paginated, Arn]
+            Next: End
+          End:
+            Type: Pass
+            End: true
