@@ -34,7 +34,7 @@ stepFunctions:
             Type: Task
             Resource:
               Fn::GetAtt: [paginated,Arn]
-            Next: End
+            Next: IsCompleted
             ResultPath: "$"
           IsCompleted:
             Type: Choice
