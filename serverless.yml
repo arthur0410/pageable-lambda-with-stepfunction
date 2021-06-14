@@ -22,7 +22,7 @@ stepFunctions:
     paginatedInfo:
       name: paginatedInfo
       definition:
-        StartedAt: Initialize
+        StartAt: Initialize
         States:
           Initialize:
             Type: Task
