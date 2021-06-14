@@ -20,7 +20,7 @@ functions:
 stepFunctions:
   stateMachines:
     paginatedInfo:
-      name: sendMessageFunc-${self:custom.service}-${opt:stage}
+      name: paginatedInfo
       definition:
         StartedAt: Initialize
         States:
