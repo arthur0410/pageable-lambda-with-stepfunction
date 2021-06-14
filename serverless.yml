@@ -27,12 +27,12 @@ stepFunctions:
           Initialize:
             Type: Task
             Resource:
-              Fn::GetAtt::[initialize, Arn]
+              Fn::GetAtt::[initialize,Arn]
             Next: Paginated
           Paginated:
             Type: Task
             Resource:
-              Fn::GetAtt::[paginated, Arn]
+              Fn::GetAtt::[paginated,Arn]
             Next: End
           End:
             Type: Pass
