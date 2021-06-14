@@ -35,7 +35,7 @@ stepFunctions:
             Resource:
               Fn::GetAtt: [paginated,Arn]
             Next: End
-            ResultPath: "$"+
+            ResultPath: "$"
           IsCompleted:
             Type: Choice
             Choices:
