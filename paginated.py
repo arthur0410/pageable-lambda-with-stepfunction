@@ -6,6 +6,6 @@ def handler_paginated(event, context):
 
     event["page"] += 1
     if (event["page"] >= 3):
-        event["isc_completed"] = True
+        event["is_completed"] = True
 
     return event
