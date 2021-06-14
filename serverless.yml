@@ -29,11 +29,20 @@ stepFunctions:
             Resource:
               Fn::GetAtt: [initialize,Arn]
             Next: Paginated
+            ResultPath: "$"
           Paginated:
             Type: Task
             Resource:
               Fn::GetAtt: [paginated,Arn]
             Next: End
+            ResultPath: "$"+
+          IsCompleted:
+            Type: Choice
+            Choices:
+            - Variable: "$.foo"
+              BooleanEquals: true
+              Next: End
+            Default: Paginated
           End:
             Type: Pass
             End: true
