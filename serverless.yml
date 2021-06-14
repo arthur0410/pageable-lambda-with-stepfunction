@@ -39,7 +39,7 @@ stepFunctions:
           IsCompleted:
             Type: Choice
             Choices:
-            - Variable: "$.foo"
+            - Variable: "$.is_completed"
               BooleanEquals: true
               Next: End
             Default: Paginated
