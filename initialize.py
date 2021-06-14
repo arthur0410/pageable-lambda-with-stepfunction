@@ -2,7 +2,7 @@
 
 def handler_initialize(event, context):
     print("Initializing context ...")
-    return {'message': event['message']}
+    return {'message': "retorno" + event['message']}
 
 
 if __name__ == "__main__":
