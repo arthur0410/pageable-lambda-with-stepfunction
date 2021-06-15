@@ -21,6 +21,8 @@ stepFunctions:
   stateMachines:
     paginatedInfo:
       name: paginatedInfo
+      events:
+        - schedule: cron(0 12 * * ? *)
       definition:
         StartAt: Initialize
         States:
@@ -30,12 +32,14 @@ stepFunctions:
               Fn::GetAtt: [initialize,Arn]
             Next: Paginated
             ResultPath: "$"
+            TimeoutSeconds: 10
           Paginated:
             Type: Task
             Resource:
               Fn::GetAtt: [paginated,Arn]
             Next: IsCompleted
             ResultPath: "$"
+            TimeoutSeconds: 600
           IsCompleted:
             Type: Choice
             Choices:
